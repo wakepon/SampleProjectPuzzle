@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Text completeText;
-    [SerializeField] private PlayerController playerController;
+    [SerializeField] private SokobanManager sokobanManager;
 
     enum State
     {
@@ -25,23 +25,35 @@ public class GameManager : MonoBehaviour
         ChangeState(State.ready);
     }
 
+    public void ResetStage()
+    {
+        sokobanManager.CreateStage("stage1");
+    }
+
     void Update()
     {
         switch (_state)
         {
             case State.ready:
                 completeText.gameObject.SetActive(false);
-                playerController.ReadyToStart();
+                ResetStage();
                 ChangeState(State.run);
                 break;
             case State.run:
+                sokobanManager.PlayerMoveOperation();
+                if (sokobanManager.IsComplete())
+                {
+                    ChangeState(State.result);
+                }
+
                 break;
             case State.result:
                 completeText.gameObject.SetActive(true);
-                if (_stateTimer > 1.0f && Input.anyKeyDown)
+                if (_stateTimer > 2.0f && Input.anyKeyDown)
                 {
                     ChangeState(State.ready);
                 }
+
                 break;
         }
 

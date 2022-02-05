@@ -1,41 +1,19 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-public class PlayerController : MonoBehaviour
+public class BoxController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 10.0f;
     public Vector2Int posIndex;
-
-    enum State
-    {
-        ready,
-        live,
-        die
-    };
-
-    private State state;
-
-    void Awake()
-    {
-        ChangeState(State.ready);
-    }
-
+    
     public void Set(int x, int y)
     {
         posIndex.x = x;
         posIndex.y = y;
     }
-
-    public void ReadyToStart()
-    {
-        gameObject.SetActive(true);
-        ChangeState(State.ready);
-    }
-
+    
     public void Move(Vector2 nextPosition)
     {
         StartCoroutine(MoveAnimation(nextPosition));
@@ -55,26 +33,5 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = nextPosition;
-    }
-
-    void Update()
-    {
-        switch (state)
-        {
-            case State.ready:
-                ChangeState(State.live);
-                break;
-            case State.live:
-                // MoveOperation();
-                break;
-            case State.die:
-                gameObject.SetActive(false);
-                break;
-        }
-    }
-
-    void ChangeState(State next)
-    {
-        state = next;
     }
 }
