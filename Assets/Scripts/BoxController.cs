@@ -24,11 +24,12 @@ public class BoxController : MonoBehaviour
         Vector3 diff = (Vector3) nextPosition - transform.position;
         Vector3 dir = diff;
         dir.Normalize();
-        var delta = moveSpeed * Time.fixedDeltaTime;
+        var delta = moveSpeed * Time.deltaTime;
         while (diff.sqrMagnitude > delta * delta)
         {
             yield return null;
             diff = (Vector3) nextPosition - transform.position;
+            delta = moveSpeed * Time.deltaTime;
             transform.position += dir * delta;
         }
 

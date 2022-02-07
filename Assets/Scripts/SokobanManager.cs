@@ -285,6 +285,9 @@ public class SokobanManager : MonoBehaviour
 
     public void PlayerMoveOperation()
     {
+        if (player.IsMoving) //can't move while the player is moving
+            return;
+        
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             TryMovePlayer(DirectionType.up);
