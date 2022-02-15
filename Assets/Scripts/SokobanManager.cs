@@ -32,13 +32,6 @@ public class SokobanManager : MonoBehaviour
         right
     }
 
-    private string _stageString =
-        "#####\n" +
-        "#t.##\n" +
-        "#.b.#\n" +
-        "#.p.#\n" +
-        "#####";
-
     private int _columns;
     private int _rows;
     private Vector2 centerOffset;
@@ -50,8 +43,6 @@ public class SokobanManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // LoadTileData(_stageString);
-        // CreateStage();
     }
 
     public void Clear()
