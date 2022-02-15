@@ -123,7 +123,7 @@ public class SokobanManager : MonoBehaviour
         centerOffset.y = _rows * tileSize / 2.0f - tileSize / 2.0f;
         for (int y = 0; y < _rows; ++y)
         {
-            for (int x = 0; x < _rows; ++x)
+            for (int x = 0; x < _columns; ++x)
             {
                 var t = _tileArray[x, y];
                 if (t == TileType.none)
